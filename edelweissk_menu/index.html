@@ -1,1 +1,221 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edelweiss Café • Menu</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #1e2a1e;
+      --accent: #d4af37;
+      --light: #f8f5f0;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: var(--light);
+      color: #333;
+      line-height: 1.5;
+    }
+    header {
+      background: var(--primary);
+      color: white;
+      text-align: center;
+      padding: 20px 10px 15px;
+    }
+    .logo {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      border: 6px solid var(--accent);
+      object-fit: cover;
+      margin-bottom: 10px;
+    }
+    h1 {
+      font-size: 2.2em;
+      margin-bottom: 5px;
+    }
+    .lang-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      padding: 15px;
+      background: white;
+      border-bottom: 1px solid #ddd;
+    }
+    .lang-btn {
+      padding: 8px 16px;
+      border: 2px solid #ddd;
+      background: white;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 0.95em;
+    }
+    .lang-btn.active {
+      background: var(--accent);
+      color: black;
+      border-color: var(--accent);
+    }
+    .categories {
+      display: flex;
+      overflow-x: auto;
+      padding: 15px;
+      gap: 12px;
+      background: white;
+      scrollbar-width: thin;
+    }
+    .cat-btn {
+      padding: 12px 22px;
+      background: #f0e9d9;
+      border-radius: 30px;
+      white-space: nowrap;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .cat-btn.active {
+      background: var(--accent);
+      color: black;
+    }
+    .products {
+      padding: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .product {
+      display: flex;
+      background: white;
+      margin-bottom: 18px;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+    .product img {
+      width: 130px;
+      height: 130px;
+      object-fit: cover;
+    }
+    .product-info {
+      padding: 15px;
+      flex: 1;
+    }
+    .product h3 {
+      margin-bottom: 6px;
+      font-size: 1.25em;
+    }
+    .price {
+      font-size: 1.45em;
+      font-weight: bold;
+      color: var(--primary);
+      margin-top: 8px;
+    }
+    .description {
+      font-size: 0.95em;
+      color: #555;
+      margin-top: 4px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="logo.png" alt="Edelweiss Café" class="logo">
+    <h1>Edelweiss Café</h1>
+  </header>
 
+  <div class="lang-buttons" id="langButtons"></div>
+  <div class="categories" id="categories"></div>
+  
+  <div class="products" id="productsContainer"></div>
+
+  <script>
+    let currentLang = 'el';
+    let currentCategory = null;
+
+    const translations = {
+      el: "Ελληνικά", en: "English", fr: "Français", de: "Deutsch",
+      it: "Italiano", es: "Español", ru: "Русский", sr: "Srpski",
+      bg: "Български", ro: "Română", al: "Shqip", tr: "Türkçe"
+    };
+
+    // ==================== MENU DATA ====================
+    let menuData = { categories: [], products: [] };
+
+    async function loadMenu() {
+      try {
+        const res = await fetch('menu.json');
+        menuData = await res.json();
+        renderLanguages();
+        renderCategories();
+        showCategory(menuData.categories[0].id);
+      } catch (e) {
+        console.error(e);
+        document.getElementById('productsContainer').innerHTML = 
+          `<p style="text-align:center; padding:40px; color:red;">Δεν βρέθηκε το menu.json</p>`;
+      }
+    }
+
+    function renderLanguages() {
+      const container = document.getElementById('langButtons');
+      container.innerHTML = '';
+      Object.keys(translations).forEach(lang => {
+        const btn = document.createElement('button');
+        btn.className = `lang-btn ${lang === currentLang ? 'active' : ''}`;
+        btn.textContent = translations[lang];
+        btn.onclick = () => {
+          currentLang = lang;
+          renderLanguages();
+          renderCategories();
+          showCategory(currentCategory);
+        };
+        container.appendChild(btn);
+      });
+    }
+
+    function renderCategories() {
+      const container = document.getElementById('categories');
+      container.innerHTML = '';
+      menuData.categories.forEach(cat => {
+        const btn = document.createElement('button');
+        btn.className = `cat-btn ${cat.id === currentCategory ? 'active' : ''}`;
+        btn.textContent = cat.name[currentLang] || cat.name.el;
+        btn.onclick = () => showCategory(cat.id);
+        container.appendChild(btn);
+      });
+    }
+
+    function showCategory(catId) {
+      currentCategory = catId;
+      renderCategories();
+
+      const container = document.getElementById('productsContainer');
+      container.innerHTML = `<h2 style="margin-bottom:20px; text-align:center;">${menuData.categories.find(c => c.id === catId).name[currentLang]}</h2>`;
+
+      const filtered = menuData.products.filter(p => p.category === catId);
+
+      if (filtered.length === 0) {
+        container.innerHTML += `<p style="text-align:center; padding:40px;">Δεν υπάρχουν ακόμα προϊόντα σε αυτή την κατηγορία.</p>`;
+        return;
+      }
+
+      filtered.forEach(product => {
+        const div = document.createElement('div');
+        div.className = 'product';
+        div.innerHTML = `
+          <img src="\( {product.image || 'https://via.placeholder.com/130'}" alt=" \){product.name.el}">
+          <div class="product-info">
+            <h3>${product.name[currentLang] || product.name.el}</h3>
+            <p class="description">${product.description ? (product.description[currentLang] || product.description.el || '') : ''}</p>
+            <div class="price">${product.price} €</div>
+          </div>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    // Load everything
+    loadMenu();
+  </script>
+</body>
+</html>
