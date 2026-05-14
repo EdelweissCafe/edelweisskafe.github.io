@@ -1,26 +1,119 @@
 <!DOCTYPE html>
 <html lang="el">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Edelweiss Café</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      padding: 80px 20px;
-      background: #1e2a1e;
-      color: white;
-      margin: 0;
-    }
-    h1 { font-size: 2.8em; margin-bottom: 30px; }
-    img { width: 220px; border-radius: 50%; border: 10px solid #d4af37; margin: 20px 0; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edelweiss Café – Menu</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #0f0f0f;
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 10px;
+        }
+
+        header img {
+            width: 140px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-size: 28px;
+            letter-spacing: 2px;
+            margin: 0;
+            color: #f4d47c;
+        }
+
+        .lang-bar {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .lang-bar button {
+            background: #222;
+            color: #fff;
+            border: 1px solid #444;
+            padding: 8px 14px;
+            margin: 3px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .section {
+            padding: 20px;
+            border-bottom: 1px solid #333;
+        }
+
+        .section h2 {
+            font-size: 22px;
+            margin-bottom: 10px;
+            color: #f4d47c;
+        }
+
+        .item {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            font-size: 18px;
+        }
+
+        .price {
+            color: #f4d47c;
+            font-weight: bold;
+        }
+    </style>
 </head>
+
 <body>
-  <h1>Edelweiss Café</h1>
-  <img src="logo.png" alt="Edelweiss Logo">
-  <p style="font-size:1.3em;"><strong>Το Digital Menu είναι έτοιμο!</strong></p>
-  <p>Αν βλέπεις αυτό το μήνυμα → δούλεψε το setup.</p>
+
+<header>
+    <img src="logo.png" alt="Edelweiss Logo">
+    <h1>EDELWEISS CAFÉ</h1>
+</header>
+
+<div class="lang-bar">
+    <button>🇬🇷 GR</button>
+    <button>🇬🇧 EN</button>
+    <button>🇫🇷 FR</button>
+    <button>🇮🇹 IT</button>
+    <button>🇩🇪 DE</button>
+    <button>🇷🇸 RS</button>
+    <button>🇧🇬 BG</button>
+    <button>🇷🇺 RU</button>
+    <button>🇹🇷 TR</button>
+    <button>🇪🇸 ES</button>
+    <button>🇦🇱 AL</button>
+    <button>🇷🇴 RO</button>
+</div>
+
+<div class="section" id="coffee">
+    <h2>☕ Καφέδες</h2>
+
+    <div class="item"><span>Ελληνικός</span><span class="price">—</span></div>
+    <div class="item"><span>Ελληνικός Διπλός</span><span class="price">—</span></div>
+
+    <div class="item"><span>Nes Café / Φραπέ</span><span class="price">—</span></div>
+    <div class="item"><span>Μακιάτο (Macchiato)</span><span class="price">—</span></div>
+
+    <div class="item"><span>Εσπρέσο</span><span class="price">—</span></div>
+    <div class="item"><span>Εσπρέσο Διπλός</span><span class="price">—</span></div>
+    <div class="item"><span>Αμερικάνο (Americano)</span><span class="price">—</span></div>
+
+    <div class="item"><span>Φρέντο Εσπρέσο</span><span class="price">—</span></div>
+    <div class="item"><span>Καπουτσίνο</span><span class="price">—</span></div>
+    <div class="item"><span>Καπουτσίνο Φρέντο</span><span class="price">—</span></div>
+
+    <div class="item"><span>Λάτε (Latte)</span><span class="price">—</span></div>
+    <div class="item"><span>Φίλτρου / Γαλλικός</span><span class="price">—</span></div>
+</div>
+
 </body>
 </html>
