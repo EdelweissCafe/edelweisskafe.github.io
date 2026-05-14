@@ -93,6 +93,37 @@
     <button>🇦🇱 AL</button>
     <button>🇷🇴 RO</button>
 </div>
+    <div class="tabs">
+    <button onclick="showSection('coffee')">Καφέδες</button>
+    <button onclick="showSection('beverages')">Ροφήματα</button>
+    <button onclick="showSection('juices')">Χυμοί</button>
+    <button onclick="showSection('smoothies')">Smoothies</button>
+    <button onclick="showSection('softdrinks')">Αναψυκτικά</button>
+</div>
+
+<script>
+function showSection(id) {
+    document.querySelectorAll('.section').forEach(sec => sec.style.display = 'none');
+    document.getElementById(id).style.display = 'block';
+}
+</script>
+
+<style>
+.tabs {
+    text-align: center;
+    margin: 15px 0;
+}
+
+.tabs button {
+    background: #222;
+    color: #fff;
+    border: 1px solid #444;
+    padding: 8px 14px;
+    margin: 3px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+</style>
 
 <div class="section" id="coffee">
     <h2>☕ Καφέδες</h2>
