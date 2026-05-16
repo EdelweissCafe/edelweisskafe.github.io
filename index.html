@@ -148,7 +148,7 @@ function showSection(id) {
     document.querySelectorAll('.section').forEach(sec => sec.style.display = 'none');
     document.getElementById(id).style.display = 'block';
 }
-    showSection('coffee');
+    showSection('welcome');
 </script>
 
 <style>
@@ -167,6 +167,10 @@ function showSection(id) {
     cursor: pointer;
 }
 </style>
+    <div class="section" id="welcome">
+    <h2>Καλώς ήρθατε στο Edelweiss Café</h2>
+    <p class="welcome-msg">Σήμερα έχουμε έκπτωση 10% στους καφέδες!</p>
+    </div>
 
 <div class="section" id="coffee">
     <h2>☕ Καφέδες</h2>
