@@ -142,17 +142,7 @@
     <button onclick="showSection('icecream')">Παγωτά</button>
 </div>
 
-<script>
-function showSection(id) {
-    document.querySelectorAll('.section').forEach((section) => {
-        section.style.display = 'none';   // Κρύβει όλες τις κατηγορίες
-    });
 
-    document.getElementById(id).style.display = 'block';  // Εμφανίζει μόνο τη σωστή
-}
-}
-    showSection('welcome');
-</script>
 
 <style>
 .tabs {
@@ -430,7 +420,17 @@ function showSection(id) {
     <div class="item"><span>Γεύση 8</span><span class="price">—</span></div>
     <div class="item"><span>Γεύση 9</span><span class="price">—</span></div>
 </div>    
-    
+<script>
+function showSection(id) {
+    document.querySelectorAll('.section').forEach((section) => {
+        section.style.display = 'none';   // Κρύβει όλες τις κατηγορίες
+    });
+
+    document.getElementById(id).style.display = 'block';  // Εμφανίζει μόνο τη σωστή
+}
+}
+    showSection('welcome');
+</script>    
 
     
 
@@ -441,16 +441,4 @@ function showSection(id) {
 </html>
 
 
-
-
-    
-    </div>
-</div>
-
-
-
-
-
-   </div> 
-</div>
 
